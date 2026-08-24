@@ -43,9 +43,8 @@ pipeline {
         // =====================================================
         stage('Test') {
             steps {
-
-                // Run the application's automated tests here
-                echo 'Running JobFlow tests...'
+             echo 'Running JobFlow tests...'
+                sh 'exit 1'
             }
         }
     }
