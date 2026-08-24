@@ -217,3 +217,5 @@ For Docker:
 - A custom Docker network connects the services.
 
 Kubernetes, Jenkins, Terraform and AWS are intentionally not included in this first version.
+
+Jenkins GitHub Webhook CI Test
