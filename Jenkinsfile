@@ -29,6 +29,15 @@ pipeline {
                 sh 'docker compose build'
             }
         }
+        //=================================
+        //scan
+        //=================================
+        stage('Security Scan') {
+            steps {
+            sh 'trivy image jobflow-pipeline-frontend:latest'
+            sh 'trivy image jobflow-pipeline-backend:latest'
+            }
+        }
 
 
         // =====================================================
