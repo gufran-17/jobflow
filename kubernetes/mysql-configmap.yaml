@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: mysql-config
+  namespace: jobflow
+
+data:
+  MYSQL_DATABASE: jobflow
+  MYSQL_PORT: "3306"

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: jobflow-backend
+  namespace: jobflow
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: jobflow-backend
+
+  template:
+    metadata:
+      labels:
+        app: jobflow-backend
+
+    spec:
+      containers:
+        - name: backend
+          image: gufran2003/jobflow-backend:latest
+
+          ports:
+            - containerPort: 5000
+
+          env:
+            - name: PORT
+              value: "5000"
+
+            - name: DB_HOST
+              value: "mysql-service"
+
+            - name: DB_PORT
+              value: "3306"
+
+            - name: DB_USER
+              value: "root"
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
+
+            - name: DB_NAME
+              value: "jobflow"
+
+            - name: FRONTEND_URL
+              value: "http://frontend-service:5173"

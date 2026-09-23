@@ -60,13 +60,13 @@ pipeline {
 
     // =========================================================
     // POST ACTIONS
-    // =========================================================
+    // ========================================================
     post {
 
         // Execute when all pipeline stages complete successfully
         success {
             echo 'JobFlow application deployed successfully!'
-            echo 'Application URL: http://13.201.44.7:5173'
+            
         }
 
         // Execute when any pipeline stage fails

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: jobflow-frontend
+  namespace: jobflow
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: jobflow-frontend
+
+  template:
+    metadata:
+      labels:
+        app: jobflow-frontend
+
+    spec:
+      containers:
+        - name: frontend
+          image: gufran2003/jobflow-frontend:latest
+
+          ports:
+            - containerPort: 5173

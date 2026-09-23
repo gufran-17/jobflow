@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: mysql
+  namespace: jobflow
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: mysql
+
+  template:
+    metadata:
+      labels:
+        app: mysql
+
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+
+          ports:
+            - containerPort: 3306
+
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
+
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config
+                  key: MYSQL_DATABASE
+
+          volumeMounts:
+            - name: mysql-init
+              mountPath: /docker-entrypoint-initdb.d/init.sql
+              subPath: init.sql
+
+      volumes:
+        - name: mysql-init
+          hostPath:
+            path: /mnt/c/Users/Gufran/jobflow-complete/jobflow/database/init.sql
+            type: File
